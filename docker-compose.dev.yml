@@ -6,6 +6,8 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - MYSQL_DB_NAME=teams
+      - MYSQL_HOST=db
     command: npm run dev
 
   phpmyadmin:
@@ -16,3 +18,4 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: password
+

@@ -1,14 +1,15 @@
 const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
+const { MYSQL_HOST, MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD } = require('./config');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 
 // Set up Sequelize
-const sequelize = new Sequelize('teams', 'root', 'password', {
+const sequelize = new Sequelize(MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD, {
   dialect: 'mysql',
-  host: '172.23.0.2',
+  host: MYSQL_HOST,
   port: 3306,
 });
 
