@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const express = require('express');
 
 const app = express();
@@ -26,13 +28,14 @@ redisClient.on('connect', () => console.log('Redis Client Connected'));
 redisClient.on('error', (err) => console.log('Redis Client Connection Error', err));
 
 app.use(express.json());
+app.use(cors());
 
 // Set up routes
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.get('/users', UserCache, async (req, res) => {
+app.get('/api/users', UserCache, async (req, res) => {
   try {
     const cacheKey = 'users';
     const users = await User.findAll({});
@@ -48,7 +51,7 @@ app.get('/users', UserCache, async (req, res) => {
   }
 });
 
-app.post('/user', async (req, res) => {
+app.post('/api/user', async (req, res) => {
   const { name, email, phone } = req.body;
   const result = await User.create({ name, email, phone });
   res.json(result).status(200);
