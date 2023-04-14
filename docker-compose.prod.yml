@@ -4,11 +4,9 @@ services:
     ports: 
       - "80:80"
   node-app:
-    image: nyihtut007/nodeapp
-    build:
-      context: .
-      args:
-        NODE_ENV: production
+    volumes:
+      - ./:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=production
       - MYSQL_DB_NAME=teams
