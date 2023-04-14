@@ -13,8 +13,6 @@ services:
         delay: 15s
     build: .
     image: nyihtut007/nodeapp
-    args:
-      NODE_ENV: production
     environment:
       - NODE_ENV=production
       - MYSQL_DB_NAME=teams
