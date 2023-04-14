@@ -1,16 +1,22 @@
 version: "3"
 services:
   nginx:
-    ports: 
-      - "3000:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
   node-app:
-    volumes:
-      - ./:/app
-      - /app/node_modules
+    deploy:
+      replicas: 8
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s
+    build:
+      context: .
+      args:
+        NODE_ENV: production
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - MYSQL_DB_NAME=teams
       - MYSQL_HOST=db
     command: npm start
