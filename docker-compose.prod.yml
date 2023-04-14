@@ -11,10 +11,10 @@ services:
       update_config:
         parallelism: 2
         delay: 15s
-    build:
-      context: .
-      args:
-        NODE_ENV: production
+    build: .
+    image: nyihtut007/nodeapp
+    args:
+      NODE_ENV: production
     environment:
       - NODE_ENV=production
       - MYSQL_DB_NAME=teams
