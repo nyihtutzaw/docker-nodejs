@@ -6,7 +6,7 @@ const UserCache = async (req, res, next) => {
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
       const users = JSON.parse(cachedData);
-      res.json(users);
+      res.json({ data: users });
     } else {
       // If cache miss, continue to route handler
       next();

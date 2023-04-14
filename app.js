@@ -43,7 +43,7 @@ app.get('/api/users', UserCache, async (req, res) => {
       EX: 1000,
       NX: true,
     });
-    res.json(users);
+    res.json({ data: users });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
