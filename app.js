@@ -39,10 +39,14 @@ app.get('/api/users', UserCache, async (req, res) => {
   try {
     const cacheKey = 'users';
     const users = await User.findAll({});
-    await redisClient.set(cacheKey, JSON.stringify(users), {
-      EX: 1000,
-      NX: true,
-    });
+
+    if (users.length > 0) {
+      await redisClient.set(cacheKey, JSON.stringify(users), {
+        EX: 1000,
+        NX: true,
+      });
+    }
+
     res.json({ data: users });
   } catch (err) {
     // eslint-disable-next-line no-console
